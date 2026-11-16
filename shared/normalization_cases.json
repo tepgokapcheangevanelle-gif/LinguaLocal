@@ -1,0 +1,17 @@
+{
+  "description": "Cas de normalisation partagés entre normalize.py (pipeline) et normalize.ts (application). Voir docs/spec.md §1 et docs/database-schema.md §3.",
+  "cases": [
+    { "input": "", "expected": "" },
+    { "input": "   ", "expected": "" },
+    { "input": "Eau", "expected": "eau" },
+    { "input": "EAU", "expected": "eau" },
+    { "input": "Été", "expected": "ete" },
+    { "input": "éte", "expected": "ete" },
+    { "input": "CoEUR", "expected": "coeur" },
+    { "input": "s’assécher", "expected": "s'assecher" },
+    { "input": "  Trop   d’espace  ", "expected": "trop d'espace" },
+    { "input": "Échelle\tde\ngrenier", "expected": "echelle de grenier" },
+    { "input": "sorgho repiqué", "expected": "sorgho repique" },
+    { "input": "ɓernde", "expected": "ɓernde" }
+  ]
+}

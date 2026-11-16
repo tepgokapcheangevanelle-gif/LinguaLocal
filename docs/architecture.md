@@ -35,31 +35,29 @@ lingualocal/
 ├─ docs/                       scope, prd, spec, architecture, database-schema, ui-ux, api-contract, roadmap
 ├─ data-pipeline/              (Python, hors app)
 │  ├─ source/Dictionnaire_Peul.pdf
-│  ├─ extract.py               PDF → raw.csv
-│  ├─ clean.py                 raw.csv → clean.csv
-│  ├─ build_db.py              validated.csv → fulfulde.db (+ id_map.csv)
-│  ├─ checks.py                contrôles de cohérence
+│  ├─ extract_proto.py         PDF → raw_peul_sample.csv + inverted_sample.csv (prototype jour 1)
+│  ├─ build_seed_db.py         inverted_sample.csv → app/assets/db/seed_test.db
+│  ├─ extract.py, clean.py, build_db.py, checks.py   (étapes 2 à 5 du pipeline)
 │  ├─ normalize.py             normalisation Python
-│  ├─ data/ raw.csv, clean.csv, validated.csv, id_map.csv
+│  ├─ data/ raw_peul_sample.csv, inverted_sample.csv, puis raw.csv, clean.csv, validated.csv, id_map.csv
 │  └─ tests/
 ├─ shared/
 │  └─ normalization_cases.json cas de test communs Python / Jest
 └─ app/                        (Expo)
    ├─ app/                     écrans (Expo Router)
-   │  ├─ (tabs)/index.tsx          Accueil
-   │  ├─ (tabs)/translate.tsx      Traducteur
+   │  ├─ (tabs)/index.tsx          Traducteur (écran d'ouverture + en-tête Accueil)
    │  ├─ (tabs)/dictionary.tsx     Dictionnaire
    │  ├─ (tabs)/favorites.tsx
    │  ├─ (tabs)/history.tsx
-   │  └─ entry/[id].tsx            Détail d'une entrée
+   │  └─ entry/[id].tsx            Détail d'une entrée (étape 5)
    ├─ src/
-   │  ├─ db/          client.ts (ouverture, init, versions), schema-user.ts
-   │  ├─ services/    search.ts, dictionary.ts, favorites.ts, history.ts
+   │  ├─ db/          client.ts (ouverture, copie de la base, user.db)
+   │  ├─ services/    dictionary.ts (recherche, liste, détail, comptage)
    │  ├─ lib/         normalize.ts
    │  ├─ components/  ResultCard, ValidationBadge, EmptyState, SearchBar…
-   │  ├─ hooks/       useSearch, useFavorites…
+   │  ├─ hooks/       useSearch, useFavorites… (étapes suivantes)
    │  └─ theme/       couleurs, typographie
-   ├─ assets/db/fulfulde.db
+   ├─ assets/db/seed_test.db   (base de test ; fulfulde.db à l'étape 3)
    └─ __tests__/
 ```
 

@@ -137,7 +137,7 @@ Cas d'attention :
 
 ## 4. Du CSV à la base
 
-Fichier maître : `data/validated.csv` (UTF-8).
+Fichier maître : `data-pipeline/data/validated.csv` (UTF-8).
 
 | Colonne CSV | Destination |
 |---|---|

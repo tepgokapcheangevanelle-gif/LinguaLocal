@@ -3,7 +3,7 @@
 Application mobile **hors ligne** de recherche et de traduction lexicale du **français vers le fulfulde** (variante du Diamaré, Extrême-Nord du Cameroun).
 
 > Projet académique (travail pratique), durée prévue : 10 jours ouvrés.
-> **Statut : conception terminée, développement en cours de démarrage.**
+> **Statut : conception terminée (cahier des charges v1.1), application Expo initialisée sur une base de test de 30 entrées.**
 
 ## Objectif
 
@@ -61,7 +61,7 @@ Les documents de référence sont dans `docs/` :
 
 | Document | Contenu |
 |---|---|
-| `cahier-des-charges.md` | Cahier des charges v1.1 |
+| `lingualocal_cahier_des_charges.pdf` | Cahier des charges v1.1 (mobile, sans backend) |
 | `scope.md` | Périmètre du projet |
 | `prd.md` | Besoins utilisateurs et fonctionnalités |
 | `spec.md` | Comportements techniques attendus |
@@ -70,16 +70,42 @@ Les documents de référence sont dans `docs/` :
 | `ui-ux.md` | Écrans et identité visuelle |
 | `api-contract.md` | Contrat des services internes |
 | `roadmap.md` | Plan sur 10 jours |
-| `AGENTS.md` | Instructions pour les agents de codage |
 
-## Structure du dépôt (cible)
+Les instructions destinées aux agents de codage sont dans [`AGENTS.md`](AGENTS.md), à la racine.
+
+## Structure du dépôt
 
 ```
 LinguaLocal/
+├─ AGENTS.md           instructions pour les agents de codage
 ├─ docs/               documents de référence
 ├─ data-pipeline/      scripts Python et données (PDF → fulfulde.db)
+│  ├─ source/          Dictionnaire_Peul.pdf
+│  ├─ data/            raw_peul_sample.csv, inverted_sample.csv
+│  ├─ extract_proto.py prototype d'extraction (jour 1)
+│  ├─ normalize.py     normalisation Python de référence
+│  └─ build_seed_db.py base de test de 30 entrées
 ├─ shared/             cas de test communs (normalisation)
 └─ app/                application Expo
+   ├─ app/             écrans Expo Router (onglets)
+   ├─ src/             db, services, lib, composants, thème
+   └─ assets/db/       seed_test.db
+```
+
+## Démarrage rapide
+
+```bash
+cd app
+npm install
+npx expo start
+```
+
+La base embarquée au premier lancement est `app/assets/db/seed_test.db` (30 entrées
+réellement extraites du dictionnaire, statut « non vérifié »). Pour la régénérer :
+
+```bash
+cd data-pipeline
+python build_seed_db.py
 ```
 
 ## Équipe et rôles
